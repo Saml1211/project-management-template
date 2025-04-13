@@ -164,6 +164,50 @@ This is the base structure provided by the template:
 ## Key Documentation
 
 -   **[AI Project Management Guide](./AI_PROJECT_MANAGEMENT_GUIDE.md)**: The core rulebook defining the categories and workflow. **Read this first.**
+
+    The AI assistant uses the following logic (defined in the guide) for sorting projects:
+
+    ```mermaid
+    %%{init: { 'theme': 'neutral' } }%%
+    flowchart TD
+        subgraph "AI Project Categorization Workflow"
+            direction LR
+            Start["New Repository/Files"]:::startEnd --> IsMCP{"Is it MCP-related?"}:::decision;
+
+            IsMCP -- Yes --> MCPath{"Categorize MCP Project"}:::process;
+            MCPath --> MCP_OS["`/MCP/OpenSource/`"]:::path;
+            MCPath --> MCP_Mgmt["`/MCP/Management/`"]:::path;
+            MCPath --> MCP_Pers["`/MCP/Personal/`"]:::path;
+            MCP_OS & MCP_Mgmt & MCP_Pers --> CheckReadme{"Verify/Create README.md"}:::process;
+
+            IsMCP -- No --> NonMCPath{"Categorize Non-MCP Project"}:::process;
+            NonMCPath --> Work["`/Work/`"]:::path;
+            NonMCPath --> OS["`/OpenSource/`"]:::path;
+            NonMCPath --> Pers["`/Personal/`"]:::path;
+            NonMCPath --> Uncategorized{"Unsure?"}:::decision;
+            Work & OS & Pers --> CheckReadme;
+            Uncategorized --> PlaceUncat["`/Uncategorized/`"]:::path;
+            PlaceUncat --> Notify["Notify User"]:::process;
+            Notify --> StopUncat("Stop"):::startEnd;
+
+            CheckReadme --> Move["Move to Category"]:::process;
+            Move --> Report["Report Action"]:::process;
+            Report --> UpdateReadme["Update Root README Tree"]:::process;
+            UpdateReadme --> End("End"):::startEnd;
+        end
+
+        subgraph "Note on Import Process"
+           direction TB
+           Note1["New repos often start in `/_Import/`."]:::note --> Note2["The /sort_imports command triggers this workflow \\nfor each item in `/_Import/`."]:::note;
+        end
+
+        classDef startEnd fill:#d4e6f1,stroke:#2e86c1,stroke-width:2px;
+        classDef decision fill:#fdebd0,stroke:#f39c12,stroke-width:2px;
+        classDef process fill:#eafaf1,stroke:#2ecc71,stroke-width:1px;
+        classDef path fill:#f4ecf7,stroke:#8e44ad,stroke-width:1px;
+        classDef note fill:#f8f9f9,stroke:#a6acaf,stroke-width:1px;
+    ```
+
 -   **[Memory Bank](./memory-bank/)**: Contains the "meta-documentation" about *this organizational template itself* – its purpose, design, and context.
     -   `projectbrief.md`: High-level goals and scope of the template.
     -   `productContext.md`: The "why" behind this structure.
