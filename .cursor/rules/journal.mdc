@@ -1,0 +1,41 @@
+# Project Intelligence Journal
+
+This document captures important patterns, preferences, and project intelligence for the Projects workspace organization system.
+
+## Critical Implementation Paths
+
+1. **Repository Categorization**: All repositories must be properly categorized according to the structure defined in `AI_PROJECT_MANAGEMENT_GUIDE.md`.
+2. **Import Process**: New repositories should be placed in the `_Import` directory and then processed using the `/sort_imports` command.
+3. **README Maintenance**: Every directory should have a README.md file with appropriate information.
+4. **Documentation Updates**: The main README.md should be updated whenever there are structural changes to the workspace.
+
+## User Preferences and Workflow
+
+1. **Visual Documentation**: Mermaid diagrams are used for visualizing the workspace structure and project workflow, with careful attention to color schemes for both dark and light mode visibility.
+2. **Directory Trees**: Directory trees are included in README.md files to provide a clear overview of the structure.
+3. **Categorization Priority**: MCP-related projects have special categorization requirements and should be identified first before general categorization.
+
+## Project-Specific Patterns
+
+1. **Memory Bank Structure**: The memory-bank directory follows a specific hierarchical structure with core files (projectbrief.md, productContext.md, systemPatterns.md, techContext.md, activeContext.md, progress.md).
+2. **MCP Subcategorization**: The MCP directory has its own internal structure (OpenSource, Personal, Management) different from the top-level categories.
+3. **Temporary Storage**: `Uncategorized` serves as a temporary holding area for repositories pending categorization.
+
+## Known Challenges
+
+1. **Classification Ambiguity**: Some repositories may not clearly fit into a single category and require careful assessment.
+2. **Workflow Adherence**: Ensuring consistent use of the `_Import` directory for new repositories rather than direct placement.
+3. **README Consistency**: Maintaining consistent style and information across README.md files.
+
+## Evolution of Project Decisions
+
+1. **Initial Setup**: Established the basic directory structure and categorization rules.
+2. **Memory Bank Implementation**: Added a comprehensive documentation system to maintain project context.
+3. **Visual Enhancement**: Incorporated mermaid diagrams for better visualization of the workspace structure.
+4. **Color Optimization**: Refined diagram colors to ensure visibility in both dark and light modes.
+
+## Tool Usage Patterns
+
+1. **Mermaid Diagrams**: Used for creating visual representations of directory structures and workflows.
+2. **Terminal Commands**: `tree` command used for generating directory trees.
+3. **AI Assistant**: Used for file management, README creation, and diagram generation following the established patterns. 
