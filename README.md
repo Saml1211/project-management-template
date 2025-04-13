@@ -76,41 +76,39 @@ This template encourages a structured approach to project management, as visuali
 ```mermaid
 %%{init: { 'theme': 'base', 'themeVariables': { 'primaryColor': '#8be9fd', 'primaryTextColor': '#000000', 'primaryBorderColor': '#00008b', 'lineColor': '#ff757f', 'secondaryColor': '#ffd86e', 'tertiaryColor': '#a9dc76' } } }%%
 graph LR
-    subgraph "Input"
-        NewRepo["New Repository (Clone/Download)"] --> ImportDir["Place in _Import/"]
-        ImportDir --> SortCmd["Trigger /sort_imports (Manual/AI)"]
-    end
-
-    subgraph "Categorization (Based on AI_PROJECT_MANAGEMENT_GUIDE.md)"
+    subgraph Input
         direction TB
-        SortCmd --> Analyze["Analyze Repo (README, Content)"]
-
-        Analyze -- MCP? --> IsMCP{MCP Project?}
-        IsMCP -- Yes --> MCPCat["Categorize within MCP/\n(Management, OpenSource, Personal)"]
-        IsMCP -- No --> NonMCPCat["Categorize within Root/\n(Work, Personal, OpenSource, ui-library)"]
-
-        Analyze -- Unsure --> UncatDir["Place in Uncategorized/ & Flag"]
-
-        MCPCat --> Final["Move to Final Directory"]
-        NonMCPCat --> Final
-        UncatDir -.-> Final
+        Step1["1. New Repo\n(Clone/Download)"] --> Step2["2. Place in _Import/"]
+        Step2 --> Step3["3. Trigger /sort_imports"]
     end
 
-    subgraph "Documentation & Final State"
-        Final --> VerifyREADME["Verify/Create README.md"]
-        VerifyREADME --> UpdateDocs["Update Root README.md Tree (Optional)"]
-        UpdateDocs --> Organized["Repository Organized"]
+    subgraph Categorization ["Categorization (based on Guide)"]
+        direction TB
+        Step3 --> Step4["4. Analyze Repo"]
+        Step4 --> Step5{"5. MCP Project?"}
+        Step5 -- Yes --> Step6a["6a. Categorize\nwithin MCP/..."]
+        Step5 -- No --> Step6b["6b. Categorize\nwithin Root/..."]
+        Step4 -- Unsure --> Step6c["6c. Place in\nUncategorized/ & Flag"]
+        Step6a --> Step7["7. Move Repo"]
+        Step6b --> Step7
+        Step6c -.-> Step7
     end
 
-    classDef action fill:#ffb86c,stroke:#000000,stroke-width:1px,color:#000000;
+    subgraph Finalization
+        direction TB
+        Step7 --> Step8["8. Verify/Create README"]
+        Step8 --> Step9["9. Update Root Tree\n(Optional)"]
+        Step9 --> Step10["10. Repo Organized"]
+    end
+
+    %% Styling
+    classDef step fill:#ffb86c,stroke:#000000,stroke-width:1px,color:#000000;
     classDef decision fill:#bd93f9,stroke:#000000,stroke-width:1px,color:#000000;
-    classDef location fill:#50fa7b,stroke:#000000,stroke-width:1px,color:#000000;
-    classDef doc fill:#8be9fd,stroke:#000000,stroke-width:1px,color:#000000;
+    classDef final fill:#50fa7b,stroke:#000000,stroke-width:1px,color:#000000;
 
-    class NewRepo, ImportDir, SortCmd, Analyze, MCPCat, NonMCPCat, Final, VerifyREADME, UpdateDocs action;
-    class IsMCP decision;
-    class UncatDir, Organized location;
-    class AI_PROJECT_MANAGEMENT_GUIDE doc;
+    class Step1,Step2,Step3,Step4,Step6a,Step6b,Step6c,Step7,Step8,Step9 step;
+    class Step5 decision;
+    class Step10 final;
 
     linkStyle default stroke:#ff79c6,stroke-width:1.5px;
 ```
