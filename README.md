@@ -78,27 +78,27 @@ This template encourages a structured approach to project management, as visuali
 graph LR
     subgraph Input
         direction TB
-        Step1["1. New Repo\n(Clone/Download)"] --> Step2["2. Place in _Import/"]
-        Step2 --> Step3["3. Trigger /sort_imports"]
+        Step1["New Repo (Clone/Download)"] --> Step2["Place in _Import/"]
+        Step2 --> Step3["Trigger /sort_imports"]
     end
 
     subgraph Categorization ["Categorization (based on Guide)"]
         direction TB
-        Step3 --> Step4["4. Analyze Repo"]
-        Step4 --> Step5{"5. MCP Project?"}
-        Step5 -- Yes --> Step6a["6a. Categorize\nwithin MCP/..."]
-        Step5 -- No --> Step6b["6b. Categorize\nwithin Root/..."]
-        Step4 -- Unsure --> Step6c["6c. Place in\nUncategorized/ & Flag"]
-        Step6a --> Step7["7. Move Repo"]
+        Step3 --> Step4["Analyze Repo"]
+        Step4 --> Step5{"MCP Project?"}
+        Step5 -- Yes --> Step6a["Categorize MCP"]
+        Step5 -- No --> Step6b["Categorize Root"]
+        Step4 -- Unsure --> Step6c["Uncategorize & Flag"]
+        Step6a --> Step7["Move Repo"]
         Step6b --> Step7
         Step6c -.-> Step7
     end
 
     subgraph Finalization
         direction TB
-        Step7 --> Step8["8. Verify/Create README"]
-        Step8 --> Step9["9. Update Root Tree\n(Optional)"]
-        Step9 --> Step10["10. Repo Organized"]
+        Step7 --> Step8["README Check"]
+        Step8 --> Step9["Update Tree (Optional)"]
+        Step9 --> Step10["Repo Organized"]
     end
 
     %% Styling
@@ -106,7 +106,7 @@ graph LR
     classDef decision fill:#bd93f9,stroke:#000000,stroke-width:1px,color:#000000;
     classDef final fill:#50fa7b,stroke:#000000,stroke-width:1px,color:#000000;
 
-    class Step1,Step2,Step3,Step4,Step6a,Step6b,Step6c,Step7,Step8,Step9 step;
+    class Step1,Step2,Step3,Step4,Step6a,Step6b,Step6c,Step7,Step8,Step9,Step10 step;
     class Step5 decision;
     class Step10 final;
 
